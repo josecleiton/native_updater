@@ -47,10 +47,7 @@ class _HomeState extends State<Home> {
         title: Text('Your App'),
       ),
       body: Center(
-        child: TextButton(
-            onPressed: requestAPI,
-            child: Text('Request API')
-        ),
+        child: TextButton(onPressed: requestAPI, child: Text('Request API')),
       ),
     );
   }
@@ -63,7 +60,7 @@ class _HomeState extends State<Home> {
     try {
       Response response = await dio.get('/get');
     } on DioError catch (e) {
-      checkVersion(e.response.statusCode);
+      checkVersion(e.response?.statusCode ?? 500);
     }
   }
 }

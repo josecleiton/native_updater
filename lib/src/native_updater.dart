@@ -113,19 +113,17 @@ class NativeUpdater {
       if (_updateInfo.updateAvailability ==
           UpdateAvailability.updateAvailable) {
         if (_forceUpdate == true) {
-          InAppUpdate.performImmediateUpdate().catchError(
-            (Object e) {
-              developer.log(
-                e.toString(),
-              );
+          InAppUpdate.performImmediateUpdate().onError(
+            (Object e, StackTrace s) {
+              developer.log(e.toString(), stackTrace: s);
+              throw e;
             },
           );
         } else if (_forceUpdate == false) {
-          InAppUpdate.startFlexibleUpdate().catchError(
-            (Object e) {
-              developer.log(
-                e.toString(),
-              );
+          InAppUpdate.startFlexibleUpdate().onError(
+            (Object e, StackTrace s) {
+              developer.log(e.toString(), stackTrace: s);
+              throw e;
             },
           );
         }
